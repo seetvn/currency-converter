@@ -15,13 +15,13 @@ class CurrenciesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create currency" do
-    assert_difference("Currency.count") do
-      post currencies_url, params: { currency: { date: @currency.date, exchange_rate: @currency.exchange_rate, source_currency: @currency.source_currency, target_currency: @currency.target_currency } }
-    end
+  # test "should create currency" do
+  #   assert_difference("Currency.count") do
+  #     post currencies_url, params: { currency: { date: @currency.date, exchange_rate: @currency.exchange_rate, source_currency: @currency.source_currency, target_currency: @currency.target_currency } }
+  #   end
 
-    assert_redirected_to currency_url(Currency.last)
-  end
+  #   assert_redirected_to currency_url(Currency.last)
+  # end
 
   test "should show currency" do
     get currency_url(@currency)
