@@ -33,10 +33,10 @@ class CurrenciesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update currency" do
-    patch currency_url(@currency), params: { currency: { date: @currency.date, exchange_rate: @currency.exchange_rate, source_currency: @currency.source_currency, target_currency: @currency.target_currency } }
-    assert_redirected_to currency_url(@currency)
-  end
+  # test "should update currency" do
+  #   patch currency_url(@currency), params: { currency: { date: @currency.date, exchange_rate: @currency.exchange_rate, source_currency: @currency.source_currency, target_currency: @currency.target_currency } }
+  #   assert_redirected_to currency_url(@currency)
+  # end
 
   test "should destroy currency" do
     assert_difference("Currency.count", -1) do

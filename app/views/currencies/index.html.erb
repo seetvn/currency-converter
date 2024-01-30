@@ -2,13 +2,9 @@
 
 <h1>Currencies</h1>
 
-<div id="currencies">
-  <% @currencies.each do |currency| %>
-    <%= render currency %>
-    <p>
-      <%= link_to "Show this currency", currency %>
-    </p>
-  <% end %>
+<div>
+<%= link_to "Add new exchange rate", new_currency_path %>
 </div>
-
-<%= link_to "New currency", new_currency_path %>
+<div>
+<%= link_to "Get exchange rate", info_retrieval_currencies_path %>
+</div>

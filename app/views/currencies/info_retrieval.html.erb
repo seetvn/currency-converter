@@ -1,0 +1,26 @@
+<h1> Find exchange rate </h1>
+
+<%= form_tag(result_currencies_path, method: :get) do %>
+  <div>
+    <%= label_tag 'currency', 'Select Currency:' %>
+    <%= select_tag 'currency', options_for_select(['EUR','GBP', 'JPY', 'USD','MMK']), required: true %>
+  </div>
+
+ <div>
+    <%= label_tag 'currency2', 'Select Currency to convert to:' %>
+    <%= select_tag 'currency2', options_for_select(['EUR','GBP', 'JPY', 'USD','MMK']), required: true %>
+  </div>
+
+<div>
+    <%= label_tag 'date', 'Date:' %>
+    <%= date_field_tag 'date', nil, required: true %>
+  </div>
+
+  <div>
+    <%= label_tag 'amount', 'Enter amount:' %>
+    <%= text_field_tag 'amount', nil, required: true %>
+  </div>
+
+  <%= submit_tag 'Submit' %>
+  <%= link_to 'Go back', currencies_path%>
+<% end %>
