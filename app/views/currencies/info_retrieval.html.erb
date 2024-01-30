@@ -18,9 +18,17 @@
 
   <div>
     <%= label_tag 'amount', 'Enter amount:' %>
-    <%= text_field_tag 'amount', nil, required: true %>
+    <%= number_field_tag 'amount', nil, required: true, class:'integer', min:0 %>
   </div>
 
   <%= submit_tag 'Submit' %>
   <%= link_to 'Go back', currencies_path%>
 <% end %>
+<script>
+    var amountInput = document.getElementById('amount');
+//  console.log(amountInput + "slay----");
+    amountInput.addEventListener('change', function() {
+        console.log('Value changed:', this.value);
+        this.value = Math.abs(this.value);
+  });
+</script>
