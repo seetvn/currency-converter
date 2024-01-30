@@ -112,10 +112,15 @@ class CurrenciesController < ApplicationController
     end
 
     def calculate_implicit_exchange_rate(source_currency,target_currency,date,transit_currency)
+      # -- calculate source and target currency --
+      # -- exchange rates to the transit currency --
       default_target = transit_currency
       currency1 = Currency.find_by(source_currency:source_currency,target_currency:default_target,date:date)
       currency2 = Currency.find_by(source_currency:target_currency,target_currency:default_target,date:date)
-      if !currency1 or !currency2
+
+      #  -- raise exception when currency data doesn't exist --
+      # -- otherwise return the calculated exchange_rate--
+      if !currency1
         raise 'Currency1 data does not exist'
       elsif !currency2
         raise 'Currency2 data does not exist'
