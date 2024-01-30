@@ -1,0 +1,2 @@
+class TestCurrency < ApplicationRecord
+end
