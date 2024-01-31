@@ -1,22 +1,28 @@
 <h1> Find exchange rate </h1>
+<% currencies = [
+  'USD', 'EUR','JPY', 'BGN', 'CZK', 'DKK', 'GBP', 'HUF', 'PLN', 'RON', 'SEK',
+  'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD', 'CNY',
+  'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'PHP', 'SGD',
+  'THB', 'ZAR'
+] %>
 
 <%= form_tag(result_currencies_path, method: :get) do %>
   <div>
     <%= label_tag 'currency', 'Select Currency:' %>
-    <%= select_tag 'currency', options_for_select(['EUR','GBP', 'JPY', 'USD','MMK']), required: true %>
+    <%= select_tag 'currency', options_for_select(currencies), required: true %>
   </div>
 
- <div>
+ <div style = "text-align:center">
     <%= label_tag 'currency2', 'Select Currency to convert to:' %>
-    <%= select_tag 'currency2', options_for_select(['EUR','GBP', 'JPY', 'USD','MMK']), required: true %>
-  </div>
+    <%= select_tag 'currency2', options_for_select(currencies), required: true %>
+</div>
 
-<div>
+<div style = "margin-top:40px">
     <%= label_tag 'date', 'Date:' %>
     <%= date_field_tag 'date', nil, required: true %>
-  </div>
+</div>
 
-  <div>
+   <div style = "margin-top:40px">
     <%= label_tag 'amount', 'Enter amount:' %>
     <%= number_field_tag 'amount', nil, required: true, class:'integer', min:0 %>
   </div>
@@ -24,11 +30,10 @@
   <%= submit_tag 'Submit' %>
   <%= link_to 'Go back', currencies_path%>
 <% end %>
+
 <script>
     var amountInput = document.getElementById('amount');
-//  console.log(amountInput + "slay----");
     amountInput.addEventListener('change', function() {
-        // console.log('Value changed:', this.value);
         this.value = Math.abs(this.value);
   });
 </script>
