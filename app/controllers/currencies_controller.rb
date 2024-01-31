@@ -21,8 +21,6 @@ class CurrenciesController < ApplicationController
 
   # POST /currencies or /currencies.json
   def create
-    puts "----------currency params---------"
-    puts currency_params
     @currency = Currency.new(currency_params)
     source_currency = currency_params[:target_currency]
     target_currency = currency_params[:source_currency]
