@@ -11,4 +11,32 @@ two:
   target_currency: "USD"
   exchange_rate: 0.8571
   date: 2018-12-11
+
+
+three:
+  source_currency: "CHF"
+  target_currency: "EUR"
+  exchange_rate: 0.7896
+  date: 2018-12-11
+
+four:
+  source_currency: "GBP"
+  target_currency: "EUR"
+  exchange_rate: 0.7765
+  date: 2018-12-11
   
+
+five:
+  source_currency: "CNY"
+  target_currency: "USD"
+  exchange_rate: 4.5678
+  date: 2018-12-11
+
+six:
+  source_currency: "GBP"
+  target_currency: "EUR"
+  exchange_rate: 0.7765
+  date: 2010-12-11
+  
+
+
