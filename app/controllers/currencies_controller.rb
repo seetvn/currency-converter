@@ -21,7 +21,15 @@ class CurrenciesController < ApplicationController
 
   # POST /currencies or /currencies.json
   def create
+    puts "----------currency params---------"
+    puts currency_params
     @currency = Currency.new(currency_params)
+    source_currency = currency_params[:target_currency]
+    target_currency = currency_params[:source_currency]
+    exchange_rate = 1 / currency_params[:exchange_rate].to_f
+    date = currency_params[:date]
+    currency_2 = Currency.new(target_currency:target_currency,source_currency:source_currency,exchange_rate:exchange_rate,date:date)
+    currency_2.save
 
     respond_to do |format|
       if @currency.save
@@ -74,28 +82,31 @@ class CurrenciesController < ApplicationController
       @result = amount 
       return @result
     end
-
     currency = Currency.find_by(source_currency:source_currency,target_currency:target_currency,date:date)
-
-    # ---transit currency right now ---
-    # ---is set by default to EUR but add on views side---
-    implicit_exchange_rate = calculate_implicit_exchange_rate(source_currency,target_currency,date,"EUR")
-    # checks if currency exists
     if currency
       puts "--currency exists---"
       @result = amount / currency.exchange_rate
       @result = @result.round(2)
-    
-    # --otherwise checks if exchange rate --
-    # --can be calculated based on-- 
-    #  --the transit currency' : EUR--
+      return @result
+    end
 
-    elsif implicit_exchange_rate
+    # --otherwise: check if exchange rate --
+    # --can be calculated based on -- 
+    #  --the transit currency' : EUR --
+    transit_currency = find_transit_currency(source_currency,target_currency,date)
+    if !transit_currency
+      raise 'Cannot be converted: no transit currency'
+    end
+    implicit_exchange_rate = calculate_implicit_exchange_rate(source_currency,target_currency,date,transit_currency)
+
+    # checks if currency exists 
+    # via implicit_exchange rate
+    if implicit_exchange_rate
       puts "---implicit trigeered---"
       @result = amount * implicit_exchange_rate
       @result = @result.round(2)
     else
-      raise 'Values not found'
+      raise 'Cannot be converted: values not found'
     end
     @result
   end
@@ -111,6 +122,29 @@ class CurrenciesController < ApplicationController
       params.require(:currency).permit(:source_currency, :target_currency, :exchange_rate, :date)
     end
 
+    def find_transit_currency(source_currency,target_currency,date)
+      # find all currencies that have the mathcing params: source_currency, date
+      # then for each of those currencies (tc_i) check if (target_currency,tc_i,date) exists and the instance it exists return tc_i
+      currency_list = Currency.where(source_currency:source_currency,date:date)
+
+      # -- if currency_list is empty --
+      # -- return error since no matches -----
+      if currency_list == []
+        raise "Invalid date or currency"
+      end
+
+      # -- find transit currency ---
+      # -- return it or nil if no match ----
+      currency_list.each do |curr|
+        target_source_ = curr.target_currency
+        exists =  Currency.exists?(source_currency:target_currency, target_currency:target_source_,date:date)
+        if exists
+          return target_source_
+        end
+      end
+      nil
+    end
+
     def calculate_implicit_exchange_rate(source_currency,target_currency,date,transit_currency)
       # -- calculate source and target currency --
       # -- exchange rates to the transit currency --
@@ -120,6 +154,7 @@ class CurrenciesController < ApplicationController
 
       #  -- raise exception when currency data doesn't exist --
       # -- otherwise return the calculated exchange_rate--
+
       if !currency1
         raise 'Currency1 data does not exist'
       elsif !currency2
@@ -127,7 +162,7 @@ class CurrenciesController < ApplicationController
       else
         exchange_rate = currency2.exchange_rate / currency1.exchange_rate
         puts "---implicit exchange rate is #{exchange_rate}"
-        exchange_rate
+        return exchange_rate
       end
     end
 end
