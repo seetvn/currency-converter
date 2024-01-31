@@ -13,7 +13,15 @@ namespace :import do
         date_ = Date.parse(date)
         puts date_
         currencies.each do |currency, value|
-          Currency.create!(
+            # direct
+            Currency.create!(
+                date: date_,
+                source_currency: currency,
+                target_currency: 'EUR',
+                exchange_rate: value
+              )
+            # inverse?
+            Currency.create!(
             date: date_,
             source_currency: 'EUR',
             target_currency: currency,
