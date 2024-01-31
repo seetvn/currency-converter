@@ -7,3 +7,42 @@
 <div>
   <%= link_to "Back to currencies", currencies_path %>
 </div>
+<script>
+    var validCurrencyCodes = [
+      'USD', 'EUR', 'JPY', 'BGN', 'CZK', 'DKK', 'GBP', 'HUF', 'PLN', 'RON', 'SEK',
+      'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD', 'CNY',
+      'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'PHP', 'SGD',
+      'THB', 'ZAR', 'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN',
+      'BAM', 'BBD', 'BDT', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BSD', 'BTN', 'BWP',
+      'BYN', 'BZD', 'CDF', 'CLP', 'COP', 'CRC', 'CUP', 'CVE', 'DJF', 'DOP', 'DZD',
+      'EGP', 'ERN', 'ETB', 'FJD', 'FKP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF',
+      'GTQ', 'GYD', 'HNL', 'HRK', 'HTG', 'HNL', 'IDR', 'ILS', 'IQD', 'IRR', 'JMD',
+      'JOD', 'KES', 'KGS', 'KHR', 'KID', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR',
+      'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO',
+      'MRU', 'MUR', 'MVR', 'MWK', 'MXN', 'MXV', 'MZN', 'NAD', 'NGN', 'NIO', 'NPR',
+      'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD',
+      'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SHP', 'SLL', 'SOS', 'SRD', 'SSP', 'STN',
+      'SVC', 'SYP', 'SZL', 'TJS', 'TMT', 'TND', 'TOP', 'TTD', 'TWD', 'TZS', 'UAH',
+      'UGX', 'UYU', 'UZS', 'VES', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XOF', 'XPF',
+      'YER', 'ZMW', 'ZWL'
+    ];
+    var currencyInput = document.getElementById('currency_source_currency');
+    currencyInput.addEventListener('change', function() {
+      var enteredValue = this.value.toUpperCase();
+      this.value = enteredValue;
+      if (!validCurrencyCodes.includes(enteredValue)) {
+        alert('Invalid currency code. Enter in uppercase');
+        this.value = ''; 
+      }
+    });
+    var currencyInput2 = document.getElementById('currency_target_currency');
+    currencyInput2.addEventListener('change', function() {
+      var enteredValue2 = this.value.toUpperCase();
+      this.value = enteredValue2;
+      if (!validCurrencyCodes.includes(enteredValue2)) {
+        alert('Invalid currency code. Enter in uppercase');
+        this.value = ''; 
+      }
+     });
+  
+</script>
