@@ -1,13 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  source_currency: MyString
-  target_currency: MyString
-  exchange_rate: 1.5
-  date: 2024-01-30
+  source_currency: "USD"
+  target_currency: "EUR"
+  exchange_rate: 1.1667
+  date: 2018-12-11
 
 two:
-  source_currency: MyString
-  target_currency: MyString
-  exchange_rate: 1.5
-  date: 2024-01-30
+  source_currency: "EUR"
+  target_currency: "USD"
+  exchange_rate: 0.8571
+  date: 2018-12-11
+  
