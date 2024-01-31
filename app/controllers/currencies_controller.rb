@@ -75,19 +75,21 @@ class CurrenciesController < ApplicationController
     target_currency = params[:currency2]
     date = params[:date]
     amount = params[:amount].to_f
+    @source = source_currency
+    @target = target_currency
 
     # ---same currency code will-- 
     # --always default to 1 as exchange rate--
     if target_currency == source_currency
       @result = amount 
-      return @result
+      return @result, @source, @target
     end
     currency = Currency.find_by(source_currency:source_currency,target_currency:target_currency,date:date)
     if currency
       puts "--currency exists---"
       @result = amount / currency.exchange_rate
       @result = @result.round(2)
-      return @result
+      return @result, @source, @target
     end
 
     # --otherwise: check if exchange rate --
@@ -108,7 +110,7 @@ class CurrenciesController < ApplicationController
     else
       raise 'Cannot be converted: values not found'
     end
-    @result
+    return @result, @source, @target
   end
 
   private
