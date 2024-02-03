@@ -1,24 +1,40 @@
 # README
+## Design choices
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I chose to create two functions that handles the bulk of currency conversions within the CurrenciesController : one which checks for an implicit exchange rate if its between two non-Euro currencies and the other if the currency can be converted via a 'transit currency'.
 
-Things you may want to cover:
+I chose to store the currency exchange as a Rails model with (source,target,exchange rate and date) as the attributes. 
 
-* Ruby version
+There is functionality to add new currencies but only legitimate ones are supported.
 
-* System dependencies
+Errors are raised when the currency exchange on a certain doesn't exist and a currency doesn't exist.
 
-* Configuration
+Testing was only done manually and no scripts were used since I didn't have much time.
 
-* Database creation
+## Database Configuration
 
-* Database initialization
+The web application uses SQLite as its default database. However, it's worth noting that the database can be changed, as Rails supports various database systems. If you want to switch to a different database, you can update the configuration in the `config/database.yml` file.
 
-* How to run the test suite
+## Database Migration
 
-* Services (job queues, cache servers, search engines, etc.)
+Before launching the entire web application, it's crucial to run the database migrations. This step ensures that the database schema is set up according to the specifications in your Rails application. To perform the migration, use the following command:
 
-* Deployment instructions
+```bash
+rails db:migrate
+```
 
-* ...
+## Database Seeding
+
+The database can be populated with the data from the currency json by using
+
+```bash
+rails import:currency_json_data
+```
+
+## Starting the web app
+
+Web app can be started with
+
+```bash
+rails server 
+```
