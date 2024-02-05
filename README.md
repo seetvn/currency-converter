@@ -1,7 +1,7 @@
 # README
 # Design choices
 ## Storing the currency exchange
-I chose to store the currency exchange as a Rails model ```Currency``` with (source_currency,target_currency,exchange_rate and date) as the attributes. This allowed for easier manipulation of the data when it comes to CRUD operations and allowed the exchange rates to be stored in a more formatted way, making it easier to switch between different foreign exchange rates.
+I chose to store the currency exchange as a Rails model ```Currency``` with (```source_currency```,```target_currency```,```exchange_rate``` and ```date```) as the attributes. This allowed for easier manipulation of the data when it comes to CRUD operations and allowed the exchange rates to be stored in a more formatted way, making it easier to switch between different foreign exchange rates that can be based on any currency.
 ## Adding new currency exchange data
 New currency exchange data could be added through the ```new``` function and its corresponding ```views``` template but it only supports legitimate currencies.
 ## Currency conversion
