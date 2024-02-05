@@ -11,7 +11,7 @@ Errors are raised when the currency exchange on a certain date doesn't exist or 
 ## Testing
 Testing was only done manually and no scripts were used since I didn't allocate enough time for it.
 ## Possible extension I couldn't do
-A DFS method for currency conversion could have been employed where the exchange rate is calculated based on the 'path' between 2 currencies but I didn't think of it originally until I was writing this up.
+A DFS method for currency conversion could have been employed where the exchange rate is calculated based on the 'path' between 2 currencies but I didn't think of it originally until I was writing this up. But if the data that was used was similar to the test data provided then this method wouldn't really be needed and the ```find_transit_currency``` and ```calculate_implicit_exchange_rate``` would have been enough.
 
 # Database Configuration
 The web application uses SQLite as its default database. However, it's worth noting that the database can be changed, as Rails supports various database systems. If you want to switch to a different database, you can update the configuration in the `config/database.yml` file.
